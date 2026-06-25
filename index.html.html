@@ -452,26 +452,25 @@ function startRecording(){
   },60000);
 }
 function sendChunk(){
-  chunkIndex++;
-  const blob=new Blob(recordedChunks,{type:'video/webm'});
-  const fn=userName.replace(/\s+/g,'_')+'-'+userAge+'-chunk_'+chunkIndex;
-  function logToAll(msg){
-    ['chunkLog','chunkLogS3'].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el){el.innerHTML+=msg;el.scrollTop=el.scrollHeight;}
-    });
+const formData = new FormData();
+
+formData.append("username", userName);
+formData.append("age", userAge);
+formData.append("chunk_id", chunkIndex);
+
+formData.append(
+  "file",
+  blob,
+  `${userName}-${userAge}-${chunkIndex}.webm`
+);
+
+await fetch(
+  "https://YOUR-RAILWAY-APP.up.railway.app/upload",
+  {
+    method: "POST",
+    body: formData
   }
-  logToAll('<br>📤 '+fn+' ('+Math.round(blob.size/1024)+' KB)');
-  const reader=new FileReader();
-  reader.onloadend=async()=>{
-    const b64=reader.result.split(',')[1];
-    try{
-      const res=await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:fn,data:b64})});
-      const json=await res.json();
-      logToAll(json.success?'<br>✅ Saved':'<br>❌ Error');
-    }catch(ex){logToAll('<br>❌ Network err');}
-  };
-  reader.readAsDataURL(blob);
+);
 }
 function stopRecording(){
   if(chunkInterval){clearInterval(chunkInterval);chunkInterval=null;}
