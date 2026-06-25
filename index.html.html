@@ -451,26 +451,59 @@ function startRecording(){
     }
   },60000);
 }
-function sendChunk(){
-const formData = new FormData();
+async function sendChunk(){
 
-formData.append("username", userName);
-formData.append("age", userAge);
-formData.append("chunk_id", chunkIndex);
+  chunkIndex++;
 
-formData.append(
-  "file",
-  blob,
-  `${userName}-${userAge}-${chunkIndex}.webm`
-);
+  const blob = new Blob(
+    recordedChunks,
+    { type:'video/webm' }
+  );
 
-await fetch(
-  "https://YOUR-RAILWAY-APP.up.railway.app/upload",
-  {
-    method: "POST",
-    body: formData
+  const formData = new FormData();
+
+  formData.append("username", userName);
+  formData.append("age", userAge);
+  formData.append("chunk_id", chunkIndex);
+
+  formData.append(
+    "file",
+    blob,
+    `${userName}-${userAge}-${chunkIndex}.webm`
+  );
+
+  try{
+
+    const res = await fetch(
+      "https://YOUR-RAILWAY-APP.up.railway.app/upload",
+      {
+        method:"POST",
+        body:formData
+      }
+    );
+
+    const json = await res.json();
+
+    document.getElementById('chunkLog').innerHTML +=
+      `<br>✅ Chunk ${chunkIndex}`;
+
+    const s3=document.getElementById('chunkLogS3');
+    if(s3){
+      s3.innerHTML += `<br>✅ Chunk ${chunkIndex}`;
+    }
+
+  }catch(err){
+
+    document.getElementById('chunkLog').innerHTML +=
+      `<br>❌ Chunk ${chunkIndex}`;
+
+    const s3=document.getElementById('chunkLogS3');
+    if(s3){
+      s3.innerHTML += `<br>❌ Chunk ${chunkIndex}`;
+    }
+
+    console.error(err);
   }
-);
 }
 function stopRecording(){
   if(chunkInterval){clearInterval(chunkInterval);chunkInterval=null;}
