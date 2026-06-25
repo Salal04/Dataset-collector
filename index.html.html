@@ -466,7 +466,7 @@ function sendChunk(){
   reader.onloadend=async()=>{
     const b64=reader.result.split(',')[1];
     try{
-      const res=await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:fn,data:b64})});
+      const res=await fetch(GAS_URL,{method:'POST',body:JSON.stringify({filename:fn,data:b64})});
       const json=await res.json();
       logToAll(json.success?'<br>✅ Saved':'<br>❌ Error');
     }catch(ex){logToAll('<br>❌ Network err');}
