@@ -429,7 +429,7 @@ function onVideoEnd(){
 function startRecording(){
   recordedChunks=[];chunkIndex=0;
   const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
-  mediaRecorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:250000});
+  mediaRecorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:1200000});
   mediaRecorder.ondataavailable=e=>{if(e.data.size>0)recordedChunks.push(e.data);};
   mediaRecorder.onstop=sendChunk;
   mediaRecorder.start();
@@ -443,7 +443,7 @@ function startRecording(){
       setTimeout(()=>{
         recordedChunks=[];
         const m2=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
-        mediaRecorder=new MediaRecorder(stream,{mimeType:m2,videoBitsPerSecond:250000});
+        mediaRecorder=new MediaRecorder(stream,{mimeType:m2,videoBitsPerSecond:1200000});
         mediaRecorder.ondataavailable=e=>{if(e.data.size>0)recordedChunks.push(e.data);};
         mediaRecorder.onstop=sendChunk;
         mediaRecorder.start();
