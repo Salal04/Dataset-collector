@@ -283,7 +283,7 @@ input:focus{border-color:#4F8EF7}
 </div>
 
 <script>
-const GAS_URL="YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+const GAS_URL="https://script.google.com/macros/s/AKfycbyBEtoZwCqYiVGRyT3hUcaCXZCbRTrRUbwo83R9eQxhnNxReEcZAtJhOmRyTpRnGsy5/exec";
 let userName="",userAge="";
 let mediaRecorder=null,recordedChunks=[],chunkIndex=0;
 let chunkInterval=null,stream=null;
@@ -451,59 +451,27 @@ function startRecording(){
     }
   },60000);
 }
-async function sendChunk(){
-
+function sendChunk(){
   chunkIndex++;
-
-  const blob = new Blob(
-    recordedChunks,
-    { type:'video/webm' }
-  );
-
-  const formData = new FormData();
-
-  formData.append("username", userName);
-  formData.append("age", userAge);
-  formData.append("chunk_id", chunkIndex);
-
-  formData.append(
-    "file",
-    blob,
-    `${userName}-${userAge}-${chunkIndex}.webm`
-  );
-
-  try{
-
-    const res = await fetch(
-      "https://YOUR-RAILWAY-APP.up.railway.app/upload",
-      {
-        method:"POST",
-        body:formData
-      }
-    );
-
-    const json = await res.json();
-
-    document.getElementById('chunkLog').innerHTML +=
-      `<br>✅ Chunk ${chunkIndex}`;
-
-    const s3=document.getElementById('chunkLogS3');
-    if(s3){
-      s3.innerHTML += `<br>✅ Chunk ${chunkIndex}`;
-    }
-
-  }catch(err){
-
-    document.getElementById('chunkLog').innerHTML +=
-      `<br>❌ Chunk ${chunkIndex}`;
-
-    const s3=document.getElementById('chunkLogS3');
-    if(s3){
-      s3.innerHTML += `<br>❌ Chunk ${chunkIndex}`;
-    }
-
-    console.error(err);
+  const blob=new Blob(recordedChunks,{type:'video/webm'});
+  const fn=userName.replace(/\s+/g,'_')+'-'+userAge+'-chunk_'+chunkIndex;
+  function logToAll(msg){
+    ['chunkLog','chunkLogS3'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el){el.innerHTML+=msg;el.scrollTop=el.scrollHeight;}
+    });
   }
+  logToAll('<br>📤 '+fn+' ('+Math.round(blob.size/1024)+' KB)');
+  const reader=new FileReader();
+  reader.onloadend=async()=>{
+    const b64=reader.result.split(',')[1];
+    try{
+      const res=await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:fn,data:b64})});
+      const json=await res.json();
+      logToAll(json.success?'<br>✅ Saved':'<br>❌ Error');
+    }catch(ex){logToAll('<br>❌ Network err');}
+  };
+  reader.readAsDataURL(blob);
 }
 function stopRecording(){
   if(chunkInterval){clearInterval(chunkInterval);chunkInterval=null;}
