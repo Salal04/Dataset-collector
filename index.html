@@ -6,7 +6,7 @@ body{font-family:'Inter',sans-serif;background:#0F1B2D;color:#F8F9FF;min-height:
 .stage.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:2rem}
-.s-orb{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.3s;border:2px solid #1E3254;flex-shrink:0}
+.s-orb{width:38px;height:38px;border-radius:50%;display:flex;alig8n-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.3s;border:2px solid #1E3254;flex-shrink:0}
 .s-orb.done{background:#4F8EF7;border-color:#4F8EF7;color:#fff}
 .s-orb.active{background:#7C5CBF;border-color:#7C5CBF;color:#fff;box-shadow:0 0 0 4px rgba(124,92,191,0.2)}
 .s-orb.pending{background:#1E3254;color:#3A5070}
@@ -66,33 +66,36 @@ input:focus{border-color:#4F8EF7}
 .vid-change-btn:hover{border-color:#4F8EF7;color:#F8F9FF}
 
 .instr-box{background:#0A1525;border-left:3px solid #7C5CBF;border-radius:0 9px 9px 0;padding:.9rem 1.1rem;margin-bottom:1rem}
-.instr-box h3{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;color:#A080E0;margin-bottom:.4rem;letter-spacing:.3px}
+.instr-box h3{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;color:#A080E0;margin-bottom:.4rem;letter-spacing:.3px;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.round-tag{background:#1a1040;color:#A080E0;border-radius:20px;padding:2px 10px;font-size:10px;font-weight:600;letter-spacing:.3px;white-space:nowrap}
 .instr-box ul{list-style:none;padding:0}
 .instr-box li{font-size:13px;color:#6B8CAE;line-height:1.7;padding-left:1.2rem;position:relative}
 .instr-box li::before{content:"→";position:absolute;left:0;color:#7C5CBF}
-.game-tabs{display:flex;gap:.5rem;margin-bottom:1rem}
-.game-tab{flex:1;background:#0A1525;border:1px solid #1E3254;border-radius:10px;padding:.7rem;cursor:pointer;text-align:center;transition:all 0.2s}
-.game-tab:hover{border-color:#7C5CBF}
-.game-tab.active{border-color:#7C5CBF;background:#1a1040}
-.game-tab.done-tab{border-color:#22C55E;background:#0d2518}
-.game-tab-icon{font-size:1.3rem;margin-bottom:3px}
-.game-tab-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500;color:#F8F9FF}
-.game-tab-status{font-size:11px;color:#5A7A9A;margin-top:2px}
+
+.round-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:1.3rem;flex-wrap:wrap}
+.rp-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.rp-label{font-size:10px;color:#5A7A9A;text-align:center;width:64px;line-height:1.3}
+
 .timer-text{font-size:13px;color:#5A7A9A;margin-bottom:.35rem}
 .timer-bar-wrap{height:5px;background:#1E3254;border-radius:3px;margin-bottom:1rem;overflow:hidden}
 .timer-bar{height:100%;background:#4F8EF7;transition:width .5s linear;border-radius:3px}
 .game-area{background:#0A1220;border-radius:12px;padding:1.3rem;min-height:250px}
-.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:300px;margin:0 auto}
+.mem-grid{display:grid;gap:7px;margin:0 auto}
 .mc{aspect-ratio:1;background:#162032;border:1px solid #1E3254;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:all 0.18s;user-select:none}
 .mc.flip{background:#4F3A8A;border-color:#7C5CBF}
 .mc.matched{background:#0d2518;border-color:#22C55E;cursor:default}
 .mem-score{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:500;color:#F8F9FF;margin-bottom:.7rem;text-align:center}
-.react-target{width:85px;height:85px;border-radius:50%;background:#1E3254;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;transition:all 0.12s;margin:0 auto;user-select:none;border:2px solid #2A4070}
-.react-target.go{background:#22C55E;border-color:#16a34a}
-.react-result{font-size:.9rem;color:#5A7A9A;margin-top:.8rem;text-align:center;min-height:20px}
-.react-scores{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;justify-content:center}
-.rs-item{background:#162032;border-radius:7px;padding:4px 10px;font-size:11px;color:#5A7A9A;border:1px solid #1E3254}
-.rs-item span{color:#4F8EF7;font-weight:500}
+
+.target-score{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:500;color:#F8F9FF;margin-bottom:1rem;text-align:center}
+.mole-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:300px;margin:0 auto}
+.hole{aspect-ratio:1;background:#0A1220;border:2px solid #1E3254;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;cursor:pointer;user-select:none;transition:border-color .15s,background .15s}
+.hole.active-mole{border-color:#22C55E;background:#0d2518;animation:popup .15s ease}
+.hole.active-bomb{border-color:#E24B4A;background:#2a0d0d;animation:popup .15s ease}
+.hole.hit-flash{background:#163a24;border-color:#22C55E}
+.hole.bomb-flash{background:#3a1616;border-color:#E24B4A}
+@keyframes popup{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+.target-msg{text-align:center;font-size:13px;color:#5A7A9A;margin-top:1rem;min-height:20px}
+
 .done-overlay{text-align:center;padding:1.5rem 1rem}
 .done-overlay .di{font-size:2rem;margin-bottom:.6rem}
 .done-overlay .dt{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:500;color:#F8F9FF;margin-bottom:.3rem}
@@ -185,35 +188,33 @@ input:focus{border-color:#4F8EF7}
 
 <div class="stage" id="stage3">
   <div class="card">
-    <div class="ct">Play Both Games</div>
-    <div class="cs">Complete both games to finish. Each game has a 5-minute timer.</div>
+    <div class="ct">Play the Games</div>
+    <div class="cs">Two games, two rounds each — Memory Cards first, then Target Smash. Finish Round 1 to unlock Round 2, and finish both rounds of a game before moving to the next.</div>
 
     <div class="content-with-cam">
       <div class="main-content">
-        <div class="game-tabs">
-          <div class="game-tab active" id="tab1" onclick="switchTab('memory')">
-            <div class="game-tab-icon">🃏</div>
-            <div class="game-tab-name">Memory Cards</div>
-            <div class="game-tab-status" id="tab1status">Not started</div>
-          </div>
-          <div class="game-tab" id="tab2" onclick="switchTab('reaction')">
-            <div class="game-tab-icon">⚡</div>
-            <div class="game-tab-name">Reaction Speed</div>
-            <div class="game-tab-status" id="tab2status">Not started</div>
-          </div>
+
+        <div class="round-progress" id="roundProgress">
+          <div class="rp-item"><div class="s-orb active" id="rpo0">1</div><div class="rp-label">Memory R1</div></div>
+          <div class="s-line" id="rpl0"></div>
+          <div class="rp-item"><div class="s-orb pending" id="rpo1">2</div><div class="rp-label">Memory R2</div></div>
+          <div class="s-line" id="rpl1"></div>
+          <div class="rp-item"><div class="s-orb pending" id="rpo2">3</div><div class="rp-label">Target R1</div></div>
+          <div class="s-line" id="rpl2"></div>
+          <div class="rp-item"><div class="s-orb pending" id="rpo3">4</div><div class="rp-label">Target R2</div></div>
         </div>
 
         <div id="memorySection">
           <div class="instr-box">
-            <h3>HOW TO PLAY — MEMORY CARDS</h3>
+            <h3>HOW TO PLAY — MEMORY CARDS <span class="round-tag" id="memRoundTag">Round 1 of 2</span></h3>
             <ul>
               <li>Click any card to flip it and reveal the emoji.</li>
               <li>Click a second card to find its matching pair.</li>
               <li>Matched pairs stay revealed; mismatches flip back.</li>
-              <li>Match all 8 pairs to complete the game!</li>
+              <li id="memPairsHint">Match all 8 pairs to complete the round!</li>
             </ul>
           </div>
-          <div class="timer-text">Time remaining: <strong id="memTimer">5:00</strong></div>
+          <div class="timer-text">Time remaining: <strong id="memTimer">4:00</strong></div>
           <div class="timer-bar-wrap"><div class="timer-bar" id="memBar"></div></div>
           <div class="game-area" id="memArea">
             <div class="mem-score" id="memScore">Pairs found: 0 / 8</div>
@@ -221,37 +222,34 @@ input:focus{border-color:#4F8EF7}
           </div>
           <div class="done-overlay" id="memDone" style="display:none">
             <div class="di">🎉</div>
-            <div class="dt">Memory Cards Complete!</div>
+            <div class="dt">Round Complete!</div>
             <div class="ds" id="memDoneMsg"></div>
-            <button class="btn purple" style="margin-top:.9rem" onclick="switchTab('reaction')">Play Reaction Speed →</button>
+            <button class="btn purple" style="margin-top:.9rem" id="memContinueBtn" onclick="advanceRound()">Continue →</button>
           </div>
         </div>
 
-        <div id="reactionSection" style="display:none">
+        <div id="targetSection" style="display:none">
           <div class="instr-box">
-            <h3>HOW TO PLAY — REACTION SPEED</h3>
+            <h3>HOW TO PLAY — TARGET SMASH <span class="round-tag" id="targetRoundTag">Round 1 of 2</span></h3>
             <ul>
-              <li>Watch the circle — when it turns <strong style="color:#22C55E">green</strong>, click it immediately!</li>
-              <li>Do NOT click when it is still dark — wait for green.</li>
-              <li>Your reaction time in milliseconds will be recorded.</li>
-              <li>Complete 10 rounds to finish the game.</li>
+              <li>Moles 🐹 pop up randomly in the holes — click them fast before they vanish!</li>
+              <li>Watch out for bombs 💣 — clicking one costs you points, don't hit them!</li>
+              <li>Reach the target number of hits shown above the grid to finish the round.</li>
+              <li id="targetHintLine">Round gets faster and trickier the further you go — stay sharp!</li>
             </ul>
           </div>
-          <div class="timer-text">Time remaining: <strong id="reactTimer">5:00</strong></div>
-          <div class="timer-bar-wrap"><div class="timer-bar" id="reactBar"></div></div>
-          <div class="game-area" id="reactArea">
-            <div style="text-align:center">
-              <p style="font-size:13px;color:#5A7A9A;margin-bottom:1rem">Click the moment it turns green!</p>
-              <div class="react-target" id="reactTarget" onclick="handleReact()">🎯</div>
-              <div class="react-result" id="reactResult">Get ready...</div>
-              <div class="react-scores" id="reactScores"></div>
-            </div>
+          <div class="timer-text">Time remaining: <strong id="targetTimer">3:00</strong></div>
+          <div class="timer-bar-wrap"><div class="timer-bar" id="targetBar"></div></div>
+          <div class="game-area" id="targetArea">
+            <div class="target-score" id="targetScore">Hits: 0 / 15</div>
+            <div class="mole-grid" id="moleGrid"></div>
+            <div class="target-msg" id="targetMsg"></div>
           </div>
-          <div class="done-overlay" id="reactDone" style="display:none">
+          <div class="done-overlay" id="targetDone" style="display:none">
             <div class="di">🏆</div>
-            <div class="dt">Reaction Speed Complete!</div>
-            <div class="ds" id="reactDoneMsg"></div>
-            <button class="btn green" style="margin-top:.9rem" onclick="finishAll()">Finish Session ✓</button>
+            <div class="dt">Round Complete!</div>
+            <div class="ds" id="targetDoneMsg"></div>
+            <button class="btn green" style="margin-top:.9rem" id="targetContinueBtn" onclick="advanceRound()">Continue →</button>
           </div>
         </div>
       </div>
@@ -289,12 +287,6 @@ let mediaRecorder=null,recordedChunks=[],chunkIndex=0;
 let chunkInterval=null,stream=null;
 let permGranted=false,permRetry=null;
 let ytPlayer=null,ytDone=false;
-let memDoneFlag=false,reactDoneFlag=false;
-let memTimerInt=null,reactTimerInt=null;
-let memSec=300,reactSec=300;
-let reactWaiting=false,reactStart=0,reactTO=null,reactResults=[];
-let flipped=[],matchedCount=0,canFlip=true;
-let selectedVideoId='',selectedVideoTitle='';
 
 const VIDEOS=[
   {id:'qbAi_IapO8k',title:'Data Types and Operators in Javascript'},
@@ -316,6 +308,7 @@ function renderVideoGrid(){
     grid.appendChild(card);
   });
 }
+let selectedVideoId='',selectedVideoTitle='';
 function selectVideo(id,title){
   selectedVideoId=id;selectedVideoTitle=title;
   document.getElementById('chosenVidTitle').textContent=title;
@@ -479,27 +472,79 @@ function stopRecording(){
   if(stream)stream.getTracks().forEach(t=>t.stop());
 }
 
+/* ================= GAME SEQUENCE CONTROLLER ================= */
+const SEQUENCE=['mem1','mem2','tar1','tar2'];
+let seqIndex=0;
+let roundLocked=false;
+
 function goS3(){
   showStage(3);
   attachCamToStage3();
-  buildMemoryGame();
-  startMemTimer();
+  seqIndex=0;
+  roundLocked=false;
+  loadSequenceStage();
 }
 
-function switchTab(game){
-  document.getElementById('tab1').className='game-tab'+(game==='memory'?' active':memDoneFlag?' done-tab':'');
-  document.getElementById('tab2').className='game-tab'+(game==='reaction'?' active':reactDoneFlag?' done-tab':'');
-  document.getElementById('memorySection').style.display=game==='memory'?'block':'none';
-  document.getElementById('reactionSection').style.display=game==='reaction'?'block':'none';
-  if(game==='reaction'&&!reactTimerInt&&!reactDoneFlag){buildReactionGame();startReactTimer();}
+function updateRoundProgress(){
+  for(let i=0;i<4;i++){
+    const o=document.getElementById('rpo'+i);
+    if(o)o.className='s-orb '+(i<seqIndex?'done':i===seqIndex?'active':'pending');
+  }
+  for(let i=0;i<3;i++){
+    const l=document.getElementById('rpl'+i);
+    if(l)l.className='s-line '+(i<seqIndex?'done':'');
+  }
 }
 
-const EMOJIS=['🍎','🍊','🍋','🍇','🍓','🍑','🥝','🍒'];
-function buildMemoryGame(){
-  flipped=[];matchedCount=0;canFlip=true;
-  document.getElementById('memScore').textContent='Pairs found: 0 / 8';
-  const pairs=[...EMOJIS,...EMOJIS].sort(()=>Math.random()-0.5);
+function loadSequenceStage(){
+  updateRoundProgress();
+  const stage=SEQUENCE[seqIndex];
+  document.getElementById('memorySection').style.display=stage.startsWith('mem')?'block':'none';
+  document.getElementById('targetSection').style.display=stage.startsWith('tar')?'block':'none';
+  if(stage==='mem1'){
+    document.getElementById('memRoundTag').textContent='Round 1 of 2';
+    document.getElementById('memPairsHint').textContent='Match all 8 pairs to complete the round!';
+    buildMemoryGame(8);startMemTimer(240);
+  }else if(stage==='mem2'){
+    document.getElementById('memRoundTag').textContent='Round 2 of 2 — Harder!';
+    document.getElementById('memPairsHint').textContent='Match all 10 pairs to complete the round!';
+    buildMemoryGame(10);startMemTimer(300);
+  }else if(stage==='tar1'){
+    document.getElementById('targetRoundTag').textContent='Round 1 of 2';
+    document.getElementById('targetHintLine').textContent='Land 15 hits to clear this round.';
+    buildTargetGame({hits:15,minSpawn:700,maxSpawn:1400,active:900,bombProb:0.25});
+    startTargetTimer(180);
+  }else if(stage==='tar2'){
+    document.getElementById('targetRoundTag').textContent='Round 2 of 2 — Faster & Trickier!';
+    document.getElementById('targetHintLine').textContent='Land 20 hits — moles are quicker and bombs are more frequent!';
+    buildTargetGame({hits:20,minSpawn:500,maxSpawn:1000,active:650,bombProb:0.35});
+    startTargetTimer(210);
+  }
+}
+
+function advanceRound(){
+  roundLocked=false;
+  seqIndex++;
+  if(seqIndex>=SEQUENCE.length){finishAll();return;}
+  loadSequenceStage();
+}
+
+/* ================= MEMORY CARDS ================= */
+const EMOJIS=['🍎','🍊','🍋','🍇','🍓','🍑','🥝','🍒','🍍','🥥'];
+let flipped=[],matchedCount=0,canFlip=true,memTotalPairs=8;
+let memTimerInt=null,memSec=240,memTotalSec=240;
+
+function buildMemoryGame(pairsCount){
+  flipped=[];matchedCount=0;canFlip=true;memTotalPairs=pairsCount;
+  document.getElementById('memScore').textContent='Pairs found: 0 / '+pairsCount;
+  document.getElementById('memArea').style.display='block';
+  document.getElementById('memDone').style.display='none';
+  const set=EMOJIS.slice(0,pairsCount);
+  const pairs=[...set,...set].sort(()=>Math.random()-0.5);
   const grid=document.getElementById('memGrid');
+  const cols=pairsCount>8?5:4;
+  grid.style.gridTemplateColumns='repeat('+cols+',1fr)';
+  grid.style.maxWidth=pairsCount>8?'380px':'300px';
   grid.innerHTML='';
   pairs.forEach((e,i)=>{
     const c=document.createElement('div');
@@ -518,86 +563,115 @@ function flipCard(card){
       if(flipped[0].dataset.val===flipped[1].dataset.val){
         flipped.forEach(c=>c.classList.replace('flip','matched'));
         matchedCount++;
-        document.getElementById('memScore').textContent='Pairs found: '+matchedCount+' / 8';
-        if(matchedCount===8)completeMemory('all');
+        document.getElementById('memScore').textContent='Pairs found: '+matchedCount+' / '+memTotalPairs;
+        if(matchedCount===memTotalPairs)completeMemory('all');
       }else{flipped.forEach(c=>{c.classList.remove('flip');c.textContent='';});}
       flipped=[];canFlip=true;
     },650);
   }
 }
-function startMemTimer(){
-  memSec=300;updateMemTimer();
+function startMemTimer(seconds){
+  memSec=seconds;memTotalSec=seconds;updateMemTimer();
   memTimerInt=setInterval(()=>{memSec--;updateMemTimer();if(memSec<=0){clearInterval(memTimerInt);completeMemory('time');}},1000);
 }
 function updateMemTimer(){
   const m=Math.floor(memSec/60),s=memSec%60;
   document.getElementById('memTimer').textContent=m+':'+(s<10?'0':'')+s;
-  document.getElementById('memBar').style.width=(memSec/300*100)+'%';
+  document.getElementById('memBar').style.width=(memSec/memTotalSec*100)+'%';
 }
 function completeMemory(reason){
-  if(memDoneFlag)return;memDoneFlag=true;clearInterval(memTimerInt);
+  if(roundLocked)return;roundLocked=true;
+  clearInterval(memTimerInt);
   document.getElementById('memArea').style.display='none';
-  document.getElementById('memDoneMsg').textContent=reason==='all'?'All 8 pairs matched! Now play Reaction Speed.':'Time\'s up! Move on to Reaction Speed.';
+  const stage=SEQUENCE[seqIndex];
+  document.getElementById('memDoneMsg').textContent=reason==='all'
+    ?('All '+memTotalPairs+' pairs matched! Great memory 🎉')
+    :('Time\'s up! You matched '+matchedCount+' / '+memTotalPairs+' pairs.');
+  document.getElementById('memContinueBtn').textContent=stage==='mem1'?'Continue to Round 2 →':'Continue to Target Smash →';
   document.getElementById('memDone').style.display='block';
-  document.getElementById('tab1status').textContent='✓ Done';
-  document.getElementById('tab1').className='game-tab done-tab';
 }
 
-function buildReactionGame(){
-  reactResults=[];reactWaiting=false;
-  document.getElementById('reactArea').style.display='block';
-  document.getElementById('reactDone').style.display='none';
-  scheduleReact();
+/* ================= TARGET SMASH (whack-a-mole style) ================= */
+let moleConfig={},holesEls=[],moleSpawnLoop=null;
+let targetHits=0,targetTarget=15;
+let targetTimerInt=null,targetSec=180,targetTotalSec=180;
+
+function buildTargetGame(cfg){
+  moleConfig=cfg;targetHits=0;targetTarget=cfg.hits;
+  document.getElementById('targetScore').textContent='Hits: 0 / '+targetTarget;
+  document.getElementById('targetMsg').textContent='';
+  document.getElementById('targetArea').style.display='block';
+  document.getElementById('targetDone').style.display='none';
+  const grid=document.getElementById('moleGrid');
+  grid.innerHTML='';
+  holesEls=[];
+  for(let i=0;i<9;i++){
+    const h=document.createElement('div');
+    h.className='hole';h.textContent='';h.dataset.state='empty';
+    h.onclick=()=>hitHole(h);
+    grid.appendChild(h);
+    holesEls.push(h);
+  }
+  clearTimeout(moleSpawnLoop);
+  scheduleMoleSpawn();
 }
-function startReactTimer(){
-  reactSec=300;updateReactTimer();
-  reactTimerInt=setInterval(()=>{reactSec--;updateReactTimer();if(reactSec<=0){clearInterval(reactTimerInt);completeReaction('time');}},1000);
+function scheduleMoleSpawn(){
+  const delay=moleConfig.minSpawn+Math.random()*(moleConfig.maxSpawn-moleConfig.minSpawn);
+  moleSpawnLoop=setTimeout(()=>{
+    spawnMole();
+    scheduleMoleSpawn();
+  },delay);
 }
-function updateReactTimer(){
-  const m=Math.floor(reactSec/60),s=reactSec%60;
-  document.getElementById('reactTimer').textContent=m+':'+(s<10?'0':'')+s;
-  document.getElementById('reactBar').style.width=(reactSec/300*100)+'%';
+function spawnMole(){
+  const emptyHoles=holesEls.filter(h=>h.dataset.state==='empty');
+  if(!emptyHoles.length)return;
+  const h=emptyHoles[Math.floor(Math.random()*emptyHoles.length)];
+  const isBomb=Math.random()<moleConfig.bombProb;
+  h.dataset.state=isBomb?'bomb':'mole';
+  h.className='hole '+(isBomb?'active-bomb':'active-mole');
+  h.textContent=isBomb?'💣':'🐹';
+  setTimeout(()=>{
+    if(h.dataset.state==='mole'||h.dataset.state==='bomb'){
+      h.dataset.state='empty';h.className='hole';h.textContent='';
+    }
+  },moleConfig.active);
 }
-function scheduleReact(){
-  const t=document.getElementById('reactTarget');if(!t)return;
-  reactWaiting=false;t.className='react-target';t.textContent='🎯';
-  document.getElementById('reactResult').textContent='Wait for green...';
-  reactTO=setTimeout(()=>{
-    if(!document.getElementById('reactTarget'))return;
-    t.className='react-target go';t.textContent='👆';
-    reactWaiting=true;reactStart=performance.now();
-    reactTO=setTimeout(()=>{
-      if(reactWaiting){
-        document.getElementById('reactResult').textContent='⏰ Too slow! Try again.';
-        reactResults.push(9999);
-        if(reactResults.length>=10)completeReaction('done');else scheduleReact();
-      }
-    },2500);
-  },1500+Math.random()*3000);
+function hitHole(h){
+  if(h.dataset.state==='mole'){
+    targetHits++;
+    document.getElementById('targetScore').textContent='Hits: '+targetHits+' / '+targetTarget;
+    document.getElementById('targetMsg').textContent='';
+    h.className='hole hit-flash';h.textContent='✅';h.dataset.state='empty';
+    setTimeout(()=>{if(h.textContent==='✅'){h.textContent='';h.className='hole';}},200);
+    if(targetHits>=targetTarget)completeTarget('done');
+  }else if(h.dataset.state==='bomb'){
+    targetHits=Math.max(0,targetHits-2);
+    document.getElementById('targetScore').textContent='Hits: '+targetHits+' / '+targetTarget;
+    document.getElementById('targetMsg').textContent='💥 Oops! That was a bomb, -2 hits';
+    h.className='hole bomb-flash';h.textContent='💥';h.dataset.state='empty';
+    setTimeout(()=>{if(h.textContent==='💥'){h.textContent='';h.className='hole';}},200);
+  }
 }
-function handleReact(){
-  if(!reactWaiting){document.getElementById('reactResult').textContent='⚠️ Wait for green!';return;}
-  clearTimeout(reactTO);
-  const ms=Math.round(performance.now()-reactStart);
-  reactWaiting=false;reactResults.push(ms);
-  document.getElementById('reactResult').textContent='⚡ '+ms+'ms!';
-  const sc=document.getElementById('reactScores');
-  const item=document.createElement('div');
-  item.className='rs-item';
-  item.innerHTML='#'+reactResults.length+': <span>'+ms+'ms</span>';
-  sc.appendChild(item);
-  if(reactResults.length>=10)completeReaction('done');else setTimeout(scheduleReact,700);
+function startTargetTimer(seconds){
+  targetSec=seconds;targetTotalSec=seconds;updateTargetTimer();
+  targetTimerInt=setInterval(()=>{targetSec--;updateTargetTimer();if(targetSec<=0){clearInterval(targetTimerInt);completeTarget('time');}},1000);
 }
-function completeReaction(reason){
-  if(reactDoneFlag)return;reactDoneFlag=true;
-  clearInterval(reactTimerInt);clearTimeout(reactTO);
-  document.getElementById('reactArea').style.display='none';
-  const valid=reactResults.filter(r=>r<9000);
-  const avg=valid.length?Math.round(valid.reduce((a,b)=>a+b,0)/valid.length):0;
-  document.getElementById('reactDoneMsg').textContent=reason==='done'?'All 10 rounds done! Avg: '+avg+'ms.':'Time\'s up! Avg: '+(avg||'—')+'ms.';
-  document.getElementById('reactDone').style.display='block';
-  document.getElementById('tab2status').textContent='✓ Done';
-  document.getElementById('tab2').className='game-tab done-tab';
+function updateTargetTimer(){
+  const m=Math.floor(targetSec/60),s=targetSec%60;
+  document.getElementById('targetTimer').textContent=m+':'+(s<10?'0':'')+s;
+  document.getElementById('targetBar').style.width=(targetSec/targetTotalSec*100)+'%';
 }
+function completeTarget(reason){
+  if(roundLocked)return;roundLocked=true;
+  clearInterval(targetTimerInt);clearTimeout(moleSpawnLoop);
+  document.getElementById('targetArea').style.display='none';
+  const stage=SEQUENCE[seqIndex];
+  document.getElementById('targetDoneMsg').textContent=reason==='done'
+    ?('Nailed '+targetHits+' hits! Awesome reflexes 🏆')
+    :('Time\'s up! You landed '+targetHits+' / '+targetTarget+' hits.');
+  document.getElementById('targetContinueBtn').textContent=stage==='tar1'?'Continue to Round 2 →':'Finish Session ✓';
+  document.getElementById('targetDone').style.display='block';
+}
+
 function finishAll(){stopRecording();showStage(4);}
 </script>
