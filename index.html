@@ -6,7 +6,7 @@ body{font-family:'Inter',sans-serif;background:#0F1B2D;color:#F8F9FF;min-height:
 .stage.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:2rem}
-.s-orb{width:38px;height:38px;border-radius:50%;display:flex;alig8n-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.3s;border:2px solid #1E3254;flex-shrink:0}
+.s-orb{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;transition:all 0.3s;border:2px solid #1E3254;flex-shrink:0}
 .s-orb.done{background:#4F8EF7;border-color:#4F8EF7;color:#fff}
 .s-orb.active{background:#7C5CBF;border-color:#7C5CBF;color:#fff;box-shadow:0 0 0 4px rgba(124,92,191,0.2)}
 .s-orb.pending{background:#1E3254;color:#3A5070}
@@ -246,8 +246,8 @@ input:focus{border-color:#4F8EF7}
             <div class="target-msg" id="targetMsg"></div>
           </div>
           <div class="done-overlay" id="targetDone" style="display:none">
-            <div class="di">🏆</div>
-            <div class="dt">Round Complete!</div>
+            <div class="di" id="targetDoneIcon">🏆</div>
+            <div class="dt" id="targetDoneTitle">Round Complete!</div>
             <div class="ds" id="targetDoneMsg"></div>
             <button class="btn green" style="margin-top:.9rem" id="targetContinueBtn" onclick="advanceRound()">Continue →</button>
           </div>
@@ -511,14 +511,14 @@ function loadSequenceStage(){
     buildMemoryGame(10);startMemTimer(300);
   }else if(stage==='tar1'){
     document.getElementById('targetRoundTag').textContent='Round 1 of 2';
-    document.getElementById('targetHintLine').textContent='Land 15 hits to clear this round.';
-    buildTargetGame({hits:15,minSpawn:700,maxSpawn:1400,active:900,bombProb:0.25});
+    document.getElementById('targetHintLine').textContent='Land 12 hits to clear this round.';
+    buildTargetGame({hits:12,minSpawn:900,maxSpawn:1700,active:1150,bombProb:0.16});
     startTargetTimer(180);
   }else if(stage==='tar2'){
-    document.getElementById('targetRoundTag').textContent='Round 2 of 2 — Faster & Trickier!';
-    document.getElementById('targetHintLine').textContent='Land 20 hits — moles are quicker and bombs are more frequent!';
-    buildTargetGame({hits:20,minSpawn:500,maxSpawn:1000,active:650,bombProb:0.35});
-    startTargetTimer(210);
+    document.getElementById('targetRoundTag').textContent='Round 2 of 2 — A bit faster!';
+    document.getElementById('targetHintLine').textContent='Land 16 hits — moles are a little quicker this round.';
+    buildTargetGame({hits:16,minSpawn:700,maxSpawn:1300,active:950,bombProb:0.22});
+    startTargetTimer(200);
   }
 }
 
@@ -666,11 +666,28 @@ function completeTarget(reason){
   clearInterval(targetTimerInt);clearTimeout(moleSpawnLoop);
   document.getElementById('targetArea').style.display='none';
   const stage=SEQUENCE[seqIndex];
-  document.getElementById('targetDoneMsg').textContent=reason==='done'
-    ?('Nailed '+targetHits+' hits! Awesome reflexes 🏆')
-    :('Time\'s up! You landed '+targetHits+' / '+targetTarget+' hits.');
-  document.getElementById('targetContinueBtn').textContent=stage==='tar1'?'Continue to Round 2 →':'Finish Session ✓';
+  const btn=document.getElementById('targetContinueBtn');
+  const needsRetry=reason==='time'&&targetHits<targetTarget/2;
+  if(needsRetry){
+    document.getElementById('targetDoneIcon').textContent='🔁';
+    document.getElementById('targetDoneTitle').textContent='Not Quite There!';
+    document.getElementById('targetDoneMsg').textContent='You landed only '+targetHits+' / '+targetTarget+' hits. Let\'s give this round another try!';
+    btn.textContent='Retry This Round ↺';
+    btn.onclick=retryTargetRound;
+  }else{
+    document.getElementById('targetDoneIcon').textContent='🏆';
+    document.getElementById('targetDoneTitle').textContent='Round Complete!';
+    document.getElementById('targetDoneMsg').textContent=reason==='done'
+      ?('Nailed '+targetHits+' hits! Awesome reflexes 🏆')
+      :('Time\'s up! You landed '+targetHits+' / '+targetTarget+' hits.');
+    btn.textContent=stage==='tar1'?'Continue to Round 2 →':'Finish Session ✓';
+    btn.onclick=advanceRound;
+  }
   document.getElementById('targetDone').style.display='block';
+}
+function retryTargetRound(){
+  roundLocked=false;
+  loadSequenceStage();
 }
 
 function finishAll(){stopRecording();showStage(4);}
